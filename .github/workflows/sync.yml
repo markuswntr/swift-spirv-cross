@@ -1,0 +1,17 @@
+name: Sync Fork with Upstream
+
+on:
+  schedule:
+    - cron: 0 0 * * 6 # every saturday 00:00
+  workflow_dispatch:  # on button click
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tgymnich/fork-sync@v1.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          owner: markuswntr
+          base: master
+          head: master

@@ -1,0 +1,290 @@
+---
+Name: CSPIRVCross
+SwiftInferImportAsMember: true
+Availability: available
+
+Typedefs:
+  - Name: spvc_context
+    SwiftName: CContext
+    SwiftPrivate: true
+  - Name: spvc_parsed_ir
+    SwiftName: CParsedIR # TODO: Rename
+  - Name: spvc_compiler
+    SwiftName: CCompiler
+  - Name: spvc_compiler_options
+    SwiftName: CCompilerOptions
+  - Name: spvc_error_callback
+    SwiftName: CErrorCallback
+  - Name: spvc_resources
+    SwiftName: CResources
+  - Name: spvc_type
+    SwiftName: CType
+  - Name: spvc_constant
+    SwiftName: CConstant
+  - Name: spvc_set
+    SwiftName: CSet
+  - Name: spvc_type_id
+    SwiftName: CTypeIdentifier
+  - Name: spvc_variable_id
+    SwiftName: CVariableIdentifier
+  - Name: spvc_constant_id
+    SwiftName: CConstantIdentifier
+
+Functions:
+  - Name: spvc_get_version
+    Nullability: [N, N, N]
+  - Name: spvc_get_commit_revision_and_timestamp
+    NullabilityOfRet: N
+    Availability: nonswift
+  ### CContext
+  - Name: spvc_context_create
+    Nullability: [N]
+  - Name: spvc_context_destroy
+    Nullability: [N]
+  - Name: spvc_context_release_allocations
+    Nullability: [N]
+  - Name: spvc_context_get_last_error_string
+    Nullability: [N]
+    NullabilityOfRet: O
+  - Name: spvc_context_set_error_callback
+    Nullability: [N, O, O]
+  - Name: spvc_context_parse_spirv
+    Nullability: [N, N, N, N]
+  - Name: spvc_context_create_compiler
+    Nullability: [N, N, N, N, N]
+  - Name: spvc_compiler_compile
+    Nullability: [N, N]
+  - Name: spvc_compiler_create_compiler_options
+    Nullability: [N, N]
+  - Name: spvc_compiler_options_set_bool
+    Nullability: [N]
+    Availability: nonswift
+  - Name: spvc_compiler_options_set_uint
+    Nullability: [N]
+  - Name: spvc_compiler_install_compiler_options
+    Nullability: [N, N]
+
+Tags:
+  ### spirv.h
+  - Name: SpvExecutionModel_
+    SwiftName: CExecutionModel
+    EnumKind: CFClosedEnum
+  ### spirv_cross_c.h
+  - Name: spvc_bool
+    Availability: nonswift
+  - Name: spvc_reflected_resource
+    SwiftName: CReflectedResource
+  - Name: spvc_entry_point
+    SwiftName: CEntryPoint
+  - Name: spvc_result
+    SwiftName: CResult
+    EnumKind: CFClosedEnum
+  - Name: spvc_backend
+    SwiftName: CBackend
+    EnumKind: CFClosedEnum
+  - Name: spvc_capture_mode
+    SwiftName: CCaptureMode
+    EnumKind: CFClosedEnum
+  - Name: spvc_compiler_option
+    SwiftName: CCompilerOption
+    EnumKind: CFClosedEnum
+#  - Name: glslang_stage_mask_s
+#    SwiftName: CSourceStageOptions
+#    EnumKind: CFOptions
+
+Enumerators:
+  ### CResult
+  - Name: SPVC_SUCCESS
+    SwiftName: success
+    Availability: nonswift # We compare against "0" and reuse the remaining cases as error
+  - Name: SPVC_ERROR_INVALID_SPIRV
+    SwiftName: invalidSPIRV
+  - Name: SPVC_ERROR_UNSUPPORTED_SPIRV
+    SwiftName: unsupportedSPIRV
+  - Name: SPVC_ERROR_OUT_OF_MEMORY
+    SwiftName: outOfMemory
+  - Name: SPVC_ERROR_INVALID_ARGUMENT
+    SwiftName: invalidArgument
+  - Name: SPVC_ERROR_INT_MAX
+    Availability: nonswift
+  ### CBackend
+  - Name: SPVC_BACKEND_NONE
+    SwiftName: none # TODO: Make it optional nil?
+  - Name: SPVC_BACKEND_GLSL
+    SwiftName: glsl
+  - Name: SPVC_BACKEND_HLSL
+    SwiftName: hlsl
+  - Name: SPVC_BACKEND_MSL
+    SwiftName: msl
+  - Name: SPVC_BACKEND_CPP
+    Availability: nonswift # According to the docs, it is deprecated
+  - Name: SPVC_BACKEND_JSON
+    SwiftName: json
+  - Name: SPVC_BACKEND_INT_MAX
+    Availability: nonswift
+  ### CCaptureMode
+  - Name: SPVC_CAPTURE_MODE_COPY
+    SwiftName: copy
+  - Name: SPVC_CAPTURE_MODE_TAKE_OWNERSHIP
+    SwiftName: takeOwnership
+  - Name: SPVC_CAPTURE_MODE_INT_MAX
+    Availability: nonswift
+  ### CCompilerOption
+  - Name: SPVC_COMPILER_OPTION_UNKNOWN
+    Availability: nonswift
+  - Name: SPVC_COMPILER_OPTION_FORCE_TEMPORARY
+    SwiftName: forceTemporary
+  - Name: SPVC_COMPILER_OPTION_FLATTEN_MULTIDIMENSIONAL_ARRAYS
+    SwiftName: flattenMultidimensionalArrays
+  - Name: SPVC_COMPILER_OPTION_FIXUP_DEPTH_CONVENTION
+    SwiftName: fixupDepthConvention
+  - Name: SPVC_COMPILER_OPTION_FLIP_VERTEX_Y
+    SwiftName: flipVertexY
+  - Name: SPVC_COMPILER_OPTION_GLSL_SUPPORT_NONZERO_BASE_INSTANCE
+    SwiftName: glslSupportNonzeroBaseInstance
+  - Name: SPVC_COMPILER_OPTION_GLSL_SEPARATE_SHADER_OBJECTS
+    SwiftName: glslSeparateShaderObjects
+  - Name: SPVC_COMPILER_OPTION_GLSL_ENABLE_420PACK_EXTENSION
+    SwiftName: glslEnable420PackExtension
+  - Name: SPVC_COMPILER_OPTION_GLSL_VERSION
+    SwiftName: glslVersion
+  - Name: SPVC_COMPILER_OPTION_GLSL_ES
+    SwiftName: glslEs
+  - Name: SPVC_COMPILER_OPTION_GLSL_VULKAN_SEMANTICS
+    SwiftName: glslVulkanSemantics
+  - Name: SPVC_COMPILER_OPTION_GLSL_ES_DEFAULT_FLOAT_PRECISION_HIGHP
+    SwiftName: glslEsDefaultFloatPrecisionHighp
+  - Name: SPVC_COMPILER_OPTION_GLSL_ES_DEFAULT_INT_PRECISION_HIGHP
+    SwiftName: glslEsDefaultIntPrecisionHighp
+  - Name: SPVC_COMPILER_OPTION_HLSL_SHADER_MODEL
+    SwiftName: hlslShaderModel
+  - Name: SPVC_COMPILER_OPTION_HLSL_POINT_SIZE_COMPAT
+    SwiftName: hlslPointSizeCompat
+  - Name: SPVC_COMPILER_OPTION_HLSL_POINT_COORD_COMPAT
+    SwiftName: hlslPointCoordCompat
+  - Name: SPVC_COMPILER_OPTION_HLSL_SUPPORT_NONZERO_BASE_VERTEX_BASE_INSTANCE
+    SwiftName: hlslSupportNonzeroBaseVertexBaseInstance
+  - Name: SPVC_COMPILER_OPTION_MSL_VERSION
+    SwiftName: mslVersion
+  - Name: SPVC_COMPILER_OPTION_MSL_TEXEL_BUFFER_TEXTURE_WIDTH
+    SwiftName: mslTexelBufferTextureWidth
+  - Name: SPVC_COMPILER_OPTION_MSL_AUX_BUFFER_INDEX
+    Availability: nonswift # Obsolete
+  - Name: SPVC_COMPILER_OPTION_MSL_SWIZZLE_BUFFER_INDEX
+    SwiftName: mslSwizzleBufferIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_INDIRECT_PARAMS_BUFFER_INDEX
+    SwiftName: mslIndirectParamsBufferIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_SHADER_OUTPUT_BUFFER_INDEX
+    SwiftName: mslShaderOutputBufferIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_SHADER_PATCH_OUTPUT_BUFFER_INDEX
+    SwiftName: mslShaderPatchOutputBufferIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_SHADER_TESS_FACTOR_OUTPUT_BUFFER_INDEX
+    SwiftName: mslShaderTessFactorOutputBufferIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_SHADER_INPUT_WORKGROUP_INDEX
+    SwiftName: mslShaderInputWorkgroupIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_ENABLE_POINT_SIZE_BUILTIN
+    SwiftName: mslEnablePointSizeBuiltin
+  - Name: SPVC_COMPILER_OPTION_MSL_DISABLE_RASTERIZATION
+    SwiftName: mslDisableRasterization
+  - Name: SPVC_COMPILER_OPTION_MSL_CAPTURE_OUTPUT_TO_BUFFER
+    SwiftName: mslCaptureOutputToBuffer
+  - Name: SPVC_COMPILER_OPTION_MSL_SWIZZLE_TEXTURE_SAMPLES
+    SwiftName: mslSwizzleTextureSamples
+  - Name: SPVC_COMPILER_OPTION_MSL_PAD_FRAGMENT_OUTPUT_COMPONENTS
+    SwiftName: mslPadFragmentOutputComponents
+  - Name: SPVC_COMPILER_OPTION_MSL_TESS_DOMAIN_ORIGIN_LOWER_LEFT
+    SwiftName: mslTessDomainOriginLowerLeft
+  - Name: SPVC_COMPILER_OPTION_MSL_PLATFORM
+    SwiftName: mslPlatform
+  - Name: SPVC_COMPILER_OPTION_MSL_ARGUMENT_BUFFERS
+    SwiftName: mslArgumentBuffers
+  - Name: SPVC_COMPILER_OPTION_GLSL_EMIT_PUSH_CONSTANT_AS_UNIFORM_BUFFER
+    SwiftName: glslEmitPushConstantAsUniformBuffer
+  - Name: SPVC_COMPILER_OPTION_MSL_TEXTURE_BUFFER_NATIVE
+    SwiftName: mslTextureBufferNative
+  - Name: SPVC_COMPILER_OPTION_GLSL_EMIT_UNIFORM_BUFFER_AS_PLAIN_UNIFORMS
+    SwiftName: glslEmitUniformBufferAsPlainUniforms
+  - Name: SPVC_COMPILER_OPTION_MSL_BUFFER_SIZE_BUFFER_INDEX
+    SwiftName: mslBufferSizeBufferIndex
+  - Name: SPVC_COMPILER_OPTION_EMIT_LINE_DIRECTIVES
+    SwiftName: emitLineDirectives
+  - Name: SPVC_COMPILER_OPTION_MSL_MULTIVIEW
+    SwiftName: mslMultiview
+  - Name: SPVC_COMPILER_OPTION_MSL_VIEW_MASK_BUFFER_INDEX
+    SwiftName: mslViewMaskBufferIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_DEVICE_INDEX
+    SwiftName: mslDeviceIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_VIEW_INDEX_FROM_DEVICE_INDEX
+    SwiftName: mslViewIndexFromDeviceIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_DISPATCH_BASE
+    SwiftName: mslDispatchBase
+  - Name: SPVC_COMPILER_OPTION_MSL_DYNAMIC_OFFSETS_BUFFER_INDEX
+    SwiftName: mslDynamicOffsetsBufferIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_TEXTURE_1D_AS_2D
+    SwiftName: mslTexture1DAs2D
+  - Name: SPVC_COMPILER_OPTION_MSL_ENABLE_BASE_INDEX_ZERO
+    SwiftName: mslEnableBaseIndexZero
+  - Name: SPVC_COMPILER_OPTION_MSL_IOS_FRAMEBUFFER_FETCH_SUBPASS
+    Availability: nonswift # Obsolete
+  - Name: SPVC_COMPILER_OPTION_MSL_FRAMEBUFFER_FETCH_SUBPASS
+    SwiftName: mslFramebufferFetchSubpass
+  - Name: SPVC_COMPILER_OPTION_MSL_INVARIANT_FP_MATH
+    SwiftName: mslInvariantFpMath
+  - Name: SPVC_COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY
+    SwiftName: mslEmulateCubemapArray
+  - Name: SPVC_COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING
+    SwiftName: mslEnableDecorationBinding
+  - Name: SPVC_COMPILER_OPTION_MSL_FORCE_ACTIVE_ARGUMENT_BUFFER_RESOURCES
+    SwiftName: mslForceActiveArgumentBufferResources
+  - Name: SPVC_COMPILER_OPTION_MSL_FORCE_NATIVE_ARRAYS
+    SwiftName: mslForceNativeArrays
+  - Name: SPVC_COMPILER_OPTION_ENABLE_STORAGE_IMAGE_QUALIFIER_DEDUCTION
+    SwiftName: enableStorageImageQualifierDeduction
+  - Name: SPVC_COMPILER_OPTION_HLSL_FORCE_STORAGE_BUFFER_AS_UAV
+    SwiftName: hlslForceStorageBufferAsUav
+  - Name: SPVC_COMPILER_OPTION_FORCE_ZERO_INITIALIZED_VARIABLES
+    SwiftName: forceZeroInitializedVariables
+  - Name: SPVC_COMPILER_OPTION_HLSL_NONWRITABLE_UAV_TEXTURE_AS_SRV
+    SwiftName: hlslNonwritableUavTextureAsSrv
+  - Name: SPVC_COMPILER_OPTION_MSL_ENABLE_FRAG_OUTPUT_MASK
+    SwiftName: mslEnableFragOutputMask
+  - Name: SPVC_COMPILER_OPTION_MSL_ENABLE_FRAG_DEPTH_BUILTIN
+    SwiftName: mslEnableFragDepthBuiltin
+  - Name: SPVC_COMPILER_OPTION_MSL_ENABLE_FRAG_STENCIL_REF_BUILTIN
+    SwiftName: mslEnableFragStencilRefBuiltin
+  - Name: SPVC_COMPILER_OPTION_MSL_ENABLE_CLIP_DISTANCE_USER_VARYING
+    SwiftName: mslEnableClipDistanceUserVarying
+  - Name: SPVC_COMPILER_OPTION_HLSL_ENABLE_16BIT_TYPES
+    SwiftName: hlslEnable16BitTypes
+  - Name: SPVC_COMPILER_OPTION_MSL_MULTI_PATCH_WORKGROUP
+    SwiftName: mslMultiPatchWorkgroup
+  - Name: SPVC_COMPILER_OPTION_MSL_SHADER_INPUT_BUFFER_INDEX
+    SwiftName: mslShaderInputBufferIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_SHADER_INDEX_BUFFER_INDEX
+    SwiftName: mslShaderIndexBufferIndex
+  - Name: SPVC_COMPILER_OPTION_MSL_VERTEX_FOR_TESSELLATION
+    SwiftName: mslVertexForTessellation
+  - Name: SPVC_COMPILER_OPTION_MSL_VERTEX_INDEX_TYPE
+    SwiftName: mslVertexIndexType
+  - Name: SPVC_COMPILER_OPTION_GLSL_FORCE_FLATTENED_IO_BLOCKS
+    SwiftName: glslForceFlattenedIoBlocks
+  - Name: SPVC_COMPILER_OPTION_MSL_MULTIVIEW_LAYERED_RENDERING
+    SwiftName: mslMultiviewLayeredRendering
+  - Name: SPVC_COMPILER_OPTION_MSL_ARRAYED_SUBPASS_INPUT
+    SwiftName: mslArrayedSubpassInput
+  - Name: SPVC_COMPILER_OPTION_MSL_R32UI_LINEAR_TEXTURE_ALIGNMENT
+    SwiftName: mslR32UiLinearTextureAlignment
+  - Name: SPVC_COMPILER_OPTION_MSL_R32UI_ALIGNMENT_CONSTANT_ID
+    SwiftName: mslR32UiAlignmentConstantId
+  - Name: SPVC_COMPILER_OPTION_HLSL_FLATTEN_MATRIX_VERTEX_INPUT_SEMANTICS
+    SwiftName: hlslFlattenMatrixVertexInputSemantics
+  - Name: SPVC_COMPILER_OPTION_MSL_IOS_USE_SIMDGROUP_FUNCTIONS
+    SwiftName: mslIosUseSimdgroupFunctions
+  - Name: SPVC_COMPILER_OPTION_MSL_EMULATE_SUBGROUPS
+    SwiftName: mslEmulateSubgroups
+  - Name: SPVC_COMPILER_OPTION_MSL_FIXED_SUBGROUP_SIZE
+    SwiftName: mslFixedSubgroupSize
+  - Name: SPVC_COMPILER_OPTION_MSL_FORCE_SAMPLE_RATE_SHADING
+    SwiftName: mslForceSampleRateShading
+  - Name: SPVC_COMPILER_OPTION_INT_MAX
+    Availability: nonswift

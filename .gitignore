@@ -18,3 +18,4 @@
 *.vcxproj.user
 
 !CMakeLists.txt
+/.swiftpm
